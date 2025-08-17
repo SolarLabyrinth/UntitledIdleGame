@@ -6,13 +6,15 @@ extends Node2D
 @onready var upgradesList: Control = $Control
 @onready var rich_text_label_2: RichTextLabel = $RichTextLabel2
 @onready var particles: Node = $Particles
+@onready var bg_uwus: CPUParticles2D = $CPUParticles2D
+@onready var bg_uwus_parent: Node = $BGUwUs
 
 var currency := 0.0:
 	get():
 		return currency
 	set(value):
 		if rich_text_label:
-			rich_text_label.text = "Currency: " + str(int(floor(value)))
+			rich_text_label.text = "UwUs: " + str(int(floor(value)))
 		currency = value
 
 var uwusPerSecond := 0.0:
@@ -28,11 +30,25 @@ func _ready():
 	uwusPerSecond = uwusPerSecond
 	#item_list.set_item_text()
 
+var current_bguwus = 0
+
+const BGUWUS = preload("res://bguwus.tscn")
+
 func _physics_process(delta: float) -> void:
 	currency += uwusPerSecond * delta
 	for child: Upgrade in upgradesList.get_children():
 		child.disabled = child.cost > currency
-		child.unknown = child.ups / uwusPerSecond > 10
+		child.unknown = child.ups / (uwusPerSecond+1) > 5
+
+	var desired_bguwus = max(roundi(log(uwusPerSecond)), 1)
+	if(current_bguwus != desired_bguwus):
+		for uwu in bg_uwus_parent.get_children():
+			uwu.stop()
+		var emitter = BGUWUS.instantiate()
+		emitter.amount = desired_bguwus
+		emitter.emitting = true
+		bg_uwus_parent.add_child(emitter)
+		current_bguwus = desired_bguwus
 
 const EMITTER := preload("res://uwu_emitter.tscn")
 

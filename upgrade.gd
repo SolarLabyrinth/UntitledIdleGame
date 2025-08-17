@@ -20,7 +20,7 @@ signal upgrade_pressed(upgrade: Upgrade)
 		return unknown
 	set(value):
 		if value:
-			setCostLabel("???")
+			setCostLabel("--")
 		else:
 			setCostLabel(str(cost))
 		unknown = value

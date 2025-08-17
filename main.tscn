@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cehk2qf2o3ge5"]
+[gd_scene load_steps=7 format=3 uid="uid://cehk2qf2o3ge5"]
 
 [ext_resource type="Script" uid="uid://bhjhm5vwk1n53" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://uwuface.png" id="2_0xm2m"]
-[ext_resource type="FontFile" uid="uid://dwciu7ewc1wd6" path="res://Kenney Pixel.ttf" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://cev5dkipg4jx1" path="res://bguwus.tscn" id="2_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bepyngk6nyw3i" path="res://Upgrade.tscn" id="3_h2yge"]
+[ext_resource type="FontFile" uid="uid://cxfv8y6ihv7tu" path="res://Kenney Mini Square Mono.ttf" id="3_lquwl"]
 [ext_resource type="FontFile" uid="uid://dyx4xkov5usjj" path="res://Kenney Mini.ttf" id="5_lquwl"]
 
 [node name="Node2D" type="Node2D"]
@@ -16,40 +17,10 @@ offset_right = 900.0
 offset_bottom = 730.0
 color = Color(0.0823529, 0.113725, 0.156863, 1)
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2(475, 349)
-amount = 50
-texture = ExtResource("2_0xm2m")
-lifetime = 10.0
-emission_shape = 3
-emission_rect_extents = Vector2(400, 400)
-gravity = Vector2(0, -100)
+[node name="BGUwUs" type="Node" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1280.0
-offset_bottom = 149.0
-color = Color(0.870588, 0.619608, 0.254902, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = 904.0
-offset_top = -17.0
-offset_right = 1290.0
-offset_bottom = 730.0
-color = Color(0.145098, 0.227451, 0.368627, 1)
-
-[node name="ColorRect3" type="ColorRect" parent="."]
-offset_left = -11.0
-offset_top = 143.0
-offset_right = 908.0
-offset_bottom = 159.0
-color = Color(0.0352941, 0.0392157, 0.0784314, 1)
-
-[node name="ColorRect4" type="ColorRect" parent="."]
-offset_left = 899.0
-offset_top = -4.0
-offset_right = 915.0
-offset_bottom = 731.0
-color = Color(0.0352941, 0.0392157, 0.0784314, 1)
+[node name="CPUParticles2D" parent="." instance=ExtResource("2_7mycd")]
+position = Vector2(447, 761)
 
 [node name="ThingTOClick" type="TextureButton" parent="."]
 offset_left = 415.0
@@ -58,18 +29,56 @@ offset_right = 479.0
 offset_bottom = 455.0
 scale = Vector2(4, 4)
 pivot_offset = Vector2(32, 32)
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("2_0xm2m")
 
+[node name="Particles" type="Node" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 1
+offset_right = 1280.0
+offset_bottom = 149.0
+color = Color(0.870588, 0.619608, 0.254902, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = 1
+offset_left = 904.0
+offset_top = -17.0
+offset_right = 1290.0
+offset_bottom = 730.0
+color = Color(0.145098, 0.227451, 0.368627, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+z_index = 1
+offset_left = -11.0
+offset_top = 143.0
+offset_right = 908.0
+offset_bottom = 159.0
+color = Color(0.0352941, 0.0392157, 0.0784314, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+z_index = 1
+offset_left = 899.0
+offset_top = -4.0
+offset_right = 915.0
+offset_bottom = 731.0
+color = Color(0.0352941, 0.0392157, 0.0784314, 1)
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 325.0
-offset_top = 40.0
-offset_right = 903.0
-offset_bottom = 107.0
-theme_override_fonts/normal_font = ExtResource("3_1bvp3")
-theme_override_font_sizes/normal_font_size = 64
-text = "Currency: 0"
+z_index = 1
+offset_left = 17.0
+offset_top = 4.0
+offset_right = 890.0
+offset_bottom = 85.0
+theme_override_colors/default_color = Color(0.0627451, 0.0784314, 0.121569, 1)
+theme_override_fonts/normal_font = ExtResource("3_lquwl")
+theme_override_font_sizes/normal_font_size = 32
+text = "UwUs: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Control" type="VBoxContainer" parent="."]
+z_index = 1
 offset_left = 965.0
 offset_top = 45.0
 offset_right = 1161.0
@@ -113,15 +122,17 @@ cost = 1e+07
 ups = 100000
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_left = 328.0
-offset_top = 90.0
-offset_right = 1004.0
-offset_bottom = 130.0
+z_index = 1
+offset_left = 19.0
+offset_top = 68.0
+offset_right = 888.0
+offset_bottom = 122.0
+theme_override_colors/default_color = Color(0.0627451, 0.0784314, 0.121569, 1)
 theme_override_fonts/normal_font = ExtResource("5_lquwl")
 theme_override_font_sizes/normal_font_size = 24
 text = "Uwu's Per Second: 0"
-
-[node name="Particles" type="Node" parent="."]
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="ThingTOClick" to="." method="_on_thing_to_click_pressed"]
 [connection signal="upgrade_pressed" from="Control/Upgrade1" to="." method="_on_upgrade_1_upgrade_pressed"]
