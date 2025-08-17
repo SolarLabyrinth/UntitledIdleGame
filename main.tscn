@@ -1,3 +1,87 @@
-[gd_scene format=3 uid="uid://cehk2qf2o3ge5"]
+[gd_scene load_steps=6 format=3 uid="uid://cehk2qf2o3ge5"]
+
+[ext_resource type="Script" uid="uid://bhjhm5vwk1n53" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://uwuface.png" id="2_0xm2m"]
+[ext_resource type="FontFile" uid="uid://dwciu7ewc1wd6" path="res://Kenney Pixel.ttf" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bepyngk6nyw3i" path="res://Upgrade.tscn" id="3_h2yge"]
+[ext_resource type="FontFile" uid="uid://dyx4xkov5usjj" path="res://Kenney Mini.ttf" id="5_lquwl"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_ig7tw")
+
+[node name="ThingTOClick" type="TextureButton" parent="."]
+offset_left = 303.0
+offset_top = 238.0
+offset_right = 367.0
+offset_bottom = 302.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("2_0xm2m")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 325.0
+offset_top = 40.0
+offset_right = 604.0
+offset_bottom = 107.0
+theme_override_fonts/normal_font = ExtResource("3_1bvp3")
+theme_override_font_sizes/normal_font_size = 64
+text = "Currency: 0"
+
+[node name="Control" type="VBoxContainer" parent="."]
+offset_left = 952.0
+offset_top = 58.0
+offset_right = 1148.0
+offset_bottom = 401.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+
+[node name="Upgrade1" parent="Control" instance=ExtResource("3_h2yge")]
+layout_mode = 2
+text = "Autoclicker"
+cost = 100.0
+
+[node name="Upgrade2" parent="Control" instance=ExtResource("3_h2yge")]
+layout_mode = 2
+text = "Uwu Factory"
+cost = 1000.0
+ups = 10
+
+[node name="Upgrade3" parent="Control" instance=ExtResource("3_h2yge")]
+layout_mode = 2
+text = "Upgrade 3"
+cost = 10000.0
+ups = 100
+
+[node name="Upgrade4" parent="Control" instance=ExtResource("3_h2yge")]
+layout_mode = 2
+text = "Upgrade 4"
+cost = 100000.0
+ups = 1000
+
+[node name="Upgrade5" parent="Control" instance=ExtResource("3_h2yge")]
+layout_mode = 2
+text = "Upgrade 4"
+cost = 1e+06
+ups = 10000
+
+[node name="Upgrade6" parent="Control" instance=ExtResource("3_h2yge")]
+layout_mode = 2
+text = "Upgrade 4"
+cost = 1e+07
+ups = 100000
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 328.0
+offset_top = 90.0
+offset_right = 602.0
+offset_bottom = 130.0
+theme_override_fonts/normal_font = ExtResource("5_lquwl")
+theme_override_font_sizes/normal_font_size = 24
+text = "Uwu's Per Second: 0"
+
+[connection signal="pressed" from="ThingTOClick" to="." method="_on_thing_to_click_pressed"]
+[connection signal="upgrade_pressed" from="Control/Upgrade1" to="." method="_on_upgrade_1_upgrade_pressed"]
+[connection signal="upgrade_pressed" from="Control/Upgrade2" to="." method="_on_upgrade_1_upgrade_pressed"]
+[connection signal="upgrade_pressed" from="Control/Upgrade3" to="." method="_on_upgrade_1_upgrade_pressed"]
+[connection signal="upgrade_pressed" from="Control/Upgrade4" to="." method="_on_upgrade_1_upgrade_pressed"]
+[connection signal="upgrade_pressed" from="Control/Upgrade5" to="." method="_on_upgrade_1_upgrade_pressed"]
+[connection signal="upgrade_pressed" from="Control/Upgrade6" to="." method="_on_upgrade_1_upgrade_pressed"]
