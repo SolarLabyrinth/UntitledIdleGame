@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: solarlabyrinth/action-setup-godot@v2
+        with:
+          version: 4.4.1-stable
+
+      - name: Export Game
+        run: |
+          mkdir -p ./build
+          godot --headless --export-release "Web" ./build/index.html
+
+      - name: Setup Butler
+        uses: solarlabyrinth/action-setup-butler@v1
+        with:
+          key: ${{ secrets.BUTLER_API_KEY }}
+
+      - name: Upload to Itch
+        run: butler push ./build solarlabyrinth/idlegamejam:web
