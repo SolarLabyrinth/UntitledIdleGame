@@ -5,6 +5,7 @@ extends Node2D
 @onready var item_list: ItemList = $ItemList
 @onready var upgradesList: Control = $Control
 @onready var rich_text_label_2: RichTextLabel = $RichTextLabel2
+@onready var particles: Node = $Particles
 
 var currency := 0.0:
 	get():
@@ -29,10 +30,33 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	currency += uwusPerSecond * delta
+	for child: Upgrade in upgradesList.get_children():
+		child.disabled = child.cost > currency
+		child.unknown = child.ups / uwusPerSecond > 10
+
+const EMITTER := preload("res://uwu_emitter.tscn")
 
 func _on_thing_to_click_pressed() -> void:
 	currency += 1
-	pass # Replace with function body.
+	var emitter = EMITTER.instantiate()
+	
+	var pos := get_global_mouse_position()
+	emitter.emitting = true
+	particles.add_child(emitter)
+	emitter.global_position = pos
+	
+	
+	var tween = get_tree().create_tween().bind_node(thing_to_click)
+	
+	var defaultScale = Vector2(4.0,4.0)
+	var newX = min(thing_to_click.scale.x * 1.25, 5)
+	var newY = min(thing_to_click.scale.y * 1.25, 5)
+	var newScale =  Vector2(newX, newY)
+	
+	#var newScale = log()
+	
+	tween.tween_property(thing_to_click, "scale", newScale, 0.1)
+	tween.tween_property(thing_to_click, "scale", defaultScale, 0.1)
 
 func _on_upgrade_1_upgrade_pressed(upgrade: Upgrade) -> void:
 	if(currency >= upgrade.cost):

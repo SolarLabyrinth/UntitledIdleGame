@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://qry1lcdl7vl8"]
+
+[sub_resource type="GDScript" id="GDScript_p0ox1"]
+script/source = "extends Node2D
+
+var currency := 0.0:
+	get():
+		return currency
+	set(value):
+		if rich_text_label:
+			rich_text_label.text = \"Currency: \" + str(int(floor(value)))
+		currency = value
+
+var uwusPerSecond := 0.0:
+	get():
+		return uwusPerSecond
+	set(value):
+		if rich_text_label_2:
+			rich_text_label_2.text = \"Uwu's Per Second: \" + str(value)
+		uwusPerSecond = value
+"
+
+[node name="Globals" type="Node2D"]
+script = SubResource("GDScript_p0ox1")

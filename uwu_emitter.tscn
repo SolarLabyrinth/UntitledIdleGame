@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://db425ofciann"]
+
+[ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://uwuface.png" id="1_l5f4x"]
+[ext_resource type="Script" uid="uid://bx67el3gvs0iw" path="res://uwu_emitter.gd" id="2_mijva"]
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+emitting = false
+amount = 1
+texture = ExtResource("1_l5f4x")
+one_shot = true
+gravity = Vector2(0, -980)
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+script = ExtResource("2_mijva")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
