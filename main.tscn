@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cehk2qf2o3ge5"]
+[gd_scene load_steps=10 format=3 uid="uid://cehk2qf2o3ge5"]
 
 [ext_resource type="Script" uid="uid://bhjhm5vwk1n53" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://assets/images/uwuface.png" id="2_0xm2m"]
@@ -6,6 +6,43 @@
 [ext_resource type="PackedScene" uid="uid://bepyngk6nyw3i" path="res://scenes/Upgrade.tscn" id="3_h2yge"]
 [ext_resource type="FontFile" uid="uid://cxfv8y6ihv7tu" path="res://assets/fonts/Kenney Mini Square Mono.ttf" id="3_lquwl"]
 [ext_resource type="FontFile" uid="uid://dyx4xkov5usjj" path="res://assets/fonts/Kenney Mini.ttf" id="5_lquwl"]
+
+[sub_resource type="Animation" id="Animation_7mycd"]
+resource_name = "rotate"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.0523599, 0.0523599, -0.0523599]
+}
+
+[sub_resource type="Animation" id="Animation_272bh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5vw27"]
+_data = {
+&"RESET": SubResource("Animation_272bh"),
+&"rotate": SubResource("Animation_7mycd")
+}
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ig7tw")
@@ -31,6 +68,13 @@ scale = Vector2(4, 4)
 pivot_offset = Vector2(32, 32)
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("2_0xm2m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ThingTOClick"]
+libraries = {
+&"": SubResource("AnimationLibrary_5vw27")
+}
+autoplay = "rotate"
+speed_scale = 1.5
 
 [node name="Particles" type="Node" parent="."]
 
