@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var thing_to_click: TextureButton = $ThingTOClick
 @onready var rich_text_label: RichTextLabel = $RichTextLabel
-@onready var item_list: ItemList = $ItemList
 @onready var upgradesList: Control = $Control
 @onready var rich_text_label_2: RichTextLabel = $RichTextLabel2
 @onready var particles: Node = $Particles
@@ -28,7 +27,6 @@ var uwusPerSecond := 0.0:
 func _ready():
 	currency = currency
 	uwusPerSecond = uwusPerSecond
-	#item_list.set_item_text()
 
 var current_bguwus = 0
 
