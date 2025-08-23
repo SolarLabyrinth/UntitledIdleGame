@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://db425ofciann"]
 
-[ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://uwuface.png" id="1_l5f4x"]
-[ext_resource type="Script" uid="uid://bx67el3gvs0iw" path="res://uwu_emitter.gd" id="2_mijva"]
+[ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://assets/images/uwuface.png" id="1_l5f4x"]
+[ext_resource type="Script" uid="uid://bx67el3gvs0iw" path="res://scenes/uwu_emitter.gd" id="2_mijva"]
 
 [node name="CPUParticles2D" type="CPUParticles2D"]
 emitting = false

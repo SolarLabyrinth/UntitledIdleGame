@@ -32,7 +32,7 @@ func _ready():
 
 var current_bguwus = 0
 
-const BGUWUS = preload("res://bguwus.tscn")
+const BGUWUS = preload("res://scenes/bguwus.tscn")
 
 func _physics_process(delta: float) -> void:
 	currency += uwusPerSecond * delta
@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 		bg_uwus_parent.add_child(emitter)
 		current_bguwus = desired_bguwus
 
-const EMITTER := preload("res://uwu_emitter.tscn")
+const EMITTER := preload("res://scenes/uwu_emitter.tscn")
 
 func _on_thing_to_click_pressed() -> void:
 	currency += 1

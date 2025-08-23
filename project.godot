@@ -13,7 +13,6 @@ config_version=5
 config/name="UntitledIdleGame"
 run/main_scene="uid://cehk2qf2o3ge5"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
 
 [display]
 

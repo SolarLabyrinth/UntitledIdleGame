@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cev5dkipg4jx1"]
 
-[ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://uwuface.png" id="1_u8rud"]
-[ext_resource type="Script" uid="uid://b4y7yel4k5aap" path="res://bguwus.gd" id="2_osbu7"]
+[ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://assets/images/uwuface.png" id="1_u8rud"]
+[ext_resource type="Script" uid="uid://b4y7yel4k5aap" path="res://scenes/bguwus.gd" id="2_osbu7"]
 
 [node name="CPUParticles2D" type="CPUParticles2D"]
 amount = 2

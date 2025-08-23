@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxcwih7xnq286"
-path="res://.godot/imported/btn.png-ad02feb80b2d25442bbc606387be113d.ctex"
+uid="uid://dwnumbqhcaoy5"
+path="res://.godot/imported/uwuface.png-88734cd96fabafa9ed6e06631fd8833d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://btn.png"
-dest_files=["res://.godot/imported/btn.png-ad02feb80b2d25442bbc606387be113d.ctex"]
+source_file="res://assets/images/uwuface.png"
+dest_files=["res://.godot/imported/uwuface.png-88734cd96fabafa9ed6e06631fd8833d.ctex"]
 
 [params]
 

@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://cehk2qf2o3ge5"]
 
 [ext_resource type="Script" uid="uid://bhjhm5vwk1n53" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://uwuface.png" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://cev5dkipg4jx1" path="res://bguwus.tscn" id="2_7mycd"]
-[ext_resource type="PackedScene" uid="uid://bepyngk6nyw3i" path="res://Upgrade.tscn" id="3_h2yge"]
-[ext_resource type="FontFile" uid="uid://cxfv8y6ihv7tu" path="res://Kenney Mini Square Mono.ttf" id="3_lquwl"]
-[ext_resource type="FontFile" uid="uid://dyx4xkov5usjj" path="res://Kenney Mini.ttf" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://assets/images/uwuface.png" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cev5dkipg4jx1" path="res://scenes/bguwus.tscn" id="2_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bepyngk6nyw3i" path="res://scenes/Upgrade.tscn" id="3_h2yge"]
+[ext_resource type="FontFile" uid="uid://cxfv8y6ihv7tu" path="res://assets/fonts/Kenney Mini Square Mono.ttf" id="3_lquwl"]
+[ext_resource type="FontFile" uid="uid://dyx4xkov5usjj" path="res://assets/fonts/Kenney Mini.ttf" id="5_lquwl"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ig7tw")
