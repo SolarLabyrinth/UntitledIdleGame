@@ -28,4 +28,4 @@ jobs:
           key: ${{ secrets.BUTLER_API_KEY }}
 
       - name: Upload to Itch
-        run: butler push ./build solarlabyrinth/idlegamejam:web
+        run: butler push ./build solarlabyrinth/uwuclicker:web
