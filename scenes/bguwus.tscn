@@ -1,13 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://cev5dkipg4jx1"]
 
-[ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://assets/images/uwuface.png" id="1_u8rud"]
+[ext_resource type="Texture2D" uid="uid://dn0lbphfthxp6" path="res://assets/images/uwu.svg" id="1_7vpg4"]
 [ext_resource type="Script" uid="uid://b4y7yel4k5aap" path="res://scenes/bguwus.gd" id="2_osbu7"]
 
 [node name="CPUParticles2D" type="CPUParticles2D"]
 amount = 2
-texture = ExtResource("1_u8rud")
+texture = ExtResource("1_7vpg4")
 lifetime = 5.0
 emission_shape = 3
 emission_rect_extents = Vector2(400, 1)
 gravity = Vector2(0, -100)
+scale_amount_min = 0.25
+scale_amount_max = 0.25
 script = ExtResource("2_osbu7")

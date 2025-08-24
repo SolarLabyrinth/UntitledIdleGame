@@ -24,9 +24,24 @@ var uwusPerSecond := 0.0:
 			rich_text_label_2.text = "Uwu's Per Second: " + str(value)
 		uwusPerSecond = value
 
+func save_game():
+	var upgrades = {}
+	for child in upgradesList.get_children():
+		if child is Upgrade:
+			upgrades[child.text] = child.count
+	Saves.save_to_file(currency, uwusPerSecond, upgrades)
+func load_game():
+	if not Saves.has_save_game():
+		save_game()
+	var save = Saves.load_game()
+	currency = save.uwus
+	uwusPerSecond = save.ups
+	for child in upgradesList.get_children():
+		if child is Upgrade:
+			child.count = save.upgrades[child.text]
+
 func _ready():
-	currency = currency
-	uwusPerSecond = uwusPerSecond
+	load_game()
 
 var current_bguwus = 0
 
@@ -34,9 +49,10 @@ const BGUWUS = preload("res://scenes/bguwus.tscn")
 
 func _physics_process(delta: float) -> void:
 	currency += uwusPerSecond * delta
-	for child: Upgrade in upgradesList.get_children():
-		child.disabled = child.cost > currency
-		child.unknown = child.ups / (uwusPerSecond+1) > 5
+	for child in upgradesList.get_children():
+		if child is Upgrade:
+			child.disabled = child.cost > currency
+			child.unknown = child.ups / (uwusPerSecond+1) > 5
 
 	var desired_bguwus = max(roundi(log(uwusPerSecond)), 1)
 	if(current_bguwus != desired_bguwus):
@@ -62,9 +78,9 @@ func _on_thing_to_click_pressed() -> void:
 	
 	var tween = get_tree().create_tween().bind_node(thing_to_click)
 	
-	var defaultScale = Vector2(4.0,4.0)
-	var newX = min(thing_to_click.scale.x * 1.25, 5)
-	var newY = min(thing_to_click.scale.y * 1.25, 5)
+	var defaultScale = Vector2(1.0,1.0)
+	var newX = min(thing_to_click.scale.x * 1.25, 1.25)
+	var newY = min(thing_to_click.scale.y * 1.25, 1.25)
 	var newScale =  Vector2(newX, newY)
 	
 	#var newScale = log()
@@ -76,4 +92,17 @@ func _on_upgrade_1_upgrade_pressed(upgrade: Upgrade) -> void:
 	if(currency >= upgrade.cost):
 		currency -= upgrade.cost;
 		uwusPerSecond += upgrade.ups
-		upgrade.cost *= 1.1
+		upgrade.count += 1
+
+func _on_timer_timeout() -> void:
+	save_game()
+	pass
+
+func _on_reset_button_pressed() -> void:
+	Saves.delete_save()	
+	currency = 0
+	uwusPerSecond = 0
+	for child in upgradesList.get_children():
+		if child is Upgrade:
+			child.count = 0
+	load_game()

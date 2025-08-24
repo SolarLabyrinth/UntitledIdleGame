@@ -1,17 +1,20 @@
+@tool
 extends Control
 class_name Upgrade
 
 signal upgrade_pressed(upgrade: Upgrade)
 
-@onready var texture_button: TextureButton = $TextureButton
+@onready var texture_button: TextureButton = $PlusOneButton
 @onready var rich_text_label: RichTextLabel = $Control/RichTextLabel
 @onready var rich_text_label_2: RichTextLabel = $Control/RichTextLabel2
+@onready var plus_five_button: TextureButton = $PlusFiveButton
 
 @export var disabled := false:
 	get():
 		return disabled
 	set(value):
-		texture_button.disabled = value
+		if texture_button:
+			texture_button.disabled = value
 		disabled = value
 
 @export var unknown := true:
@@ -24,14 +27,30 @@ signal upgrade_pressed(upgrade: Upgrade)
 			setCostLabel(str(cost))
 		unknown = value
 
-@export var text := ''
+@export var count := 0:
+	set(value):
+		count = value
+		setNameLabel()
+		setCostLabel(str(cost))
+
+@export var base_cost := 0
+
+@export var text := '':
+	get():
+		return text
+	set(value):
+		text = value
+		setNameLabel()
+
 @export var cost := 0.0:
 	get():
-		return cost
+		return floori(cost * 1.1 ** count)
 	set(value):
-		setCostLabel(str(value))
 		cost = value
 
+func setNameLabel():
+	if rich_text_label:
+		rich_text_label.text = text + " (" + str(count) + ")"
 func setCostLabel(label: String):
 	if rich_text_label_2:
 		rich_text_label_2.text = "Cost: " + label
@@ -40,18 +59,11 @@ func setCostLabel(label: String):
 
 func _ready() -> void:
 	rich_text_label.text = text
-	cost = cost / 10.0
-	unknown =unknown
-
+	unknown = unknown
 
 func _on_texture_button_pressed() -> void:
 	upgrade_pressed.emit(self)
 
 
-func _on_texture_button_button_down() -> void:
-	rich_text_label.position.y += 4
-	rich_text_label_2.position.y += 4
-
-func _on_texture_button_button_up() -> void:
-	rich_text_label.position.y -= 4
-	rich_text_label_2.position.y -= 4
+func _on_plus_five_button_pressed() -> void:
+	pass # Replace with function body.
