@@ -33,7 +33,6 @@ theme = SubResource("Theme_iyojq")
 theme_override_fonts/normal_font = ExtResource("4_a4xni")
 theme_override_font_sizes/bold_italics_font_size = 6
 theme_override_font_sizes/normal_font_size = 4
-text = "Autoclicker"
 scroll_active = false
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Control"]
@@ -45,10 +44,7 @@ theme_override_fonts/normal_font = ExtResource("4_a4xni")
 theme_override_font_sizes/normal_font_size = 4
 text = "Cost: --"
 
-[node name="BoxContainer" type="BoxContainer" parent="."]
-layout_mode = 2
-
-[node name="PlusOneButton" type="TextureButton" parent="BoxContainer"]
+[node name="PlusOneButton" type="TextureButton" parent="."]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("2_iyojq")
@@ -60,5 +56,5 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("4_2bi8n")
 texture_pressed = ExtResource("5_bdr3a")
 
-[connection signal="pressed" from="BoxContainer/PlusOneButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="PlusOneButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="PlusFiveButton" to="." method="_on_plus_five_button_pressed"]

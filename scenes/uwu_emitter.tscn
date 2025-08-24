@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://db425ofciann"]
 
-[ext_resource type="Texture2D" uid="uid://dwnumbqhcaoy5" path="res://assets/images/uwuface.png" id="1_l5f4x"]
+[ext_resource type="Texture2D" uid="uid://dn0lbphfthxp6" path="res://assets/images/uwu.svg" id="1_8gb2m"]
 [ext_resource type="Script" uid="uid://bx67el3gvs0iw" path="res://scenes/uwu_emitter.gd" id="2_mijva"]
 
 [node name="CPUParticles2D" type="CPUParticles2D"]
 emitting = false
 amount = 1
-texture = ExtResource("1_l5f4x")
+texture = ExtResource("1_8gb2m")
 one_shot = true
 gravity = Vector2(0, -980)
-scale_amount_min = 0.5
-scale_amount_max = 0.5
+scale_amount_min = 0.13
+scale_amount_max = 0.13
 script = ExtResource("2_mijva")
 
 [connection signal="finished" from="." to="." method="_on_finished"]
