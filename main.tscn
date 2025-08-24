@@ -168,7 +168,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_5vw27")
 
 [node name="Upgrade3" parent="Control" instance=ExtResource("3_h2yge")]
 layout_mode = 2
-text = "Upgrade 3"
+text = "Nya Delivery"
 cost = 1000.0
 ups = 100
 
@@ -178,7 +178,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_kek77")
 
 [node name="Upgrade4" parent="Control" instance=ExtResource("3_h2yge")]
 layout_mode = 2
-text = "Upgrade 4"
+text = "UwU Factory"
 cost = 10000.0
 ups = 1000
 
@@ -188,7 +188,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_4c57u")
 
 [node name="Upgrade5" parent="Control" instance=ExtResource("3_h2yge")]
 layout_mode = 2
-text = "Upgrade 5"
+text = "Kitten Cloner"
 cost = 100000.0
 ups = 10000
 
@@ -198,7 +198,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_efxa6")
 
 [node name="Upgrade6" parent="Control" instance=ExtResource("3_h2yge")]
 layout_mode = 2
-text = "UwU Factory"
+text = "Cuteness Distiller"
 cost = 1e+06
 ups = 100000
 
@@ -227,7 +227,7 @@ offset_left = 841.0
 offset_top = 678.0
 offset_right = 889.0
 offset_bottom = 709.0
-text = "reset"
+text = "Reset"
 
 [connection signal="pressed" from="ThingTOClick" to="." method="_on_thing_to_click_pressed"]
 [connection signal="upgrade_pressed" from="Control/Upgrade1" to="." method="_on_upgrade_1_upgrade_pressed"]
