@@ -63,7 +63,15 @@ func _ready() -> void:
 
 func _on_texture_button_pressed() -> void:
 	upgrade_pressed.emit(self)
-
+	if(GameState.uwus >= self.cost):
+		GameState.uwus -= self.cost;
+		GameState.uwusPerSecond += self.ups
+		self.count += 1
 
 func _on_plus_five_button_pressed() -> void:
-	pass # Replace with function body.
+	var total_cost = self.cost + (self.cost * 1.1 ** 1) + (self.cost * 1.1 ** 2) + (self.cost * 1.1 ** 3) + (self.cost * 1.1 ** 4)
+		
+	if(GameState.uwus >= total_cost):
+		GameState.uwus -= total_cost;
+		GameState.uwusPerSecond += self.ups
+		self.count += 5

@@ -14,6 +14,10 @@ config/name="UntitledIdleGame"
 run/main_scene="uid://cehk2qf2o3ge5"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
+[autoload]
+
+GameState="*res://GameState.tscn"
+
 [display]
 
 window/size/viewport_width=1280

@@ -11,7 +11,8 @@ static func save_to_file(uwus:int, ups:int, upgrades: Dictionary):
 	var json = JSON.stringify({
 		uwus = uwus,
 		ups = ups,
-		upgrades = upgrades
+		upgrades = upgrades,
+		timestamp = Time.get_unix_time_from_system(),
 	})
 	file.store_string(json)
 	file.close()

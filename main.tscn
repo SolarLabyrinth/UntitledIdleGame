@@ -158,7 +158,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_272bh")
 
 [node name="Upgrade2" parent="Control" instance=ExtResource("3_h2yge")]
 layout_mode = 2
-text = "Uwu Factory"
+text = "OwO DIspenser"
 cost = 100.0
 ups = 10
 
@@ -198,7 +198,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_efxa6")
 
 [node name="Upgrade6" parent="Control" instance=ExtResource("3_h2yge")]
 layout_mode = 2
-text = "Upgrade 6"
+text = "UwU Factory"
 cost = 1e+06
 ups = 100000
 

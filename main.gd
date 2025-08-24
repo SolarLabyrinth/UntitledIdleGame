@@ -8,34 +8,20 @@ extends Node2D
 @onready var bg_uwus: CPUParticles2D = $CPUParticles2D
 @onready var bg_uwus_parent: Node = $BGUwUs
 
-var currency := 0.0:
-	get():
-		return currency
-	set(value):
-		if rich_text_label:
-			rich_text_label.text = "UwUs: " + str(int(floor(value)))
-		currency = value
-
-var uwusPerSecond := 0.0:
-	get():
-		return uwusPerSecond
-	set(value):
-		if rich_text_label_2:
-			rich_text_label_2.text = "Uwu's Per Second: " + str(value)
-		uwusPerSecond = value
-
 func save_game():
 	var upgrades = {}
 	for child in upgradesList.get_children():
 		if child is Upgrade:
 			upgrades[child.text] = child.count
-	Saves.save_to_file(currency, uwusPerSecond, upgrades)
+	Saves.save_to_file(GameState.uwus, GameState.uwusPerSecond, upgrades)
 func load_game():
 	if not Saves.has_save_game():
 		save_game()
 	var save = Saves.load_game()
-	currency = save.uwus
-	uwusPerSecond = save.ups
+		
+	var elapsedSeconds = Time.get_unix_time_from_system() - save.timestamp
+	GameState.uwus = save.uwus + save.ups * elapsedSeconds
+	GameState.uwusPerSecond = save.ups
 	for child in upgradesList.get_children():
 		if child is Upgrade:
 			child.count = save.upgrades[child.text]
@@ -48,13 +34,16 @@ var current_bguwus = 0
 const BGUWUS = preload("res://scenes/bguwus.tscn")
 
 func _physics_process(delta: float) -> void:
-	currency += uwusPerSecond * delta
+	GameState.uwus += GameState.uwusPerSecond * delta
+	rich_text_label.text = "UwUs: " + str(int(floor(GameState.uwus)))
+	rich_text_label_2.text = "Uwu's Per Second: " + str(GameState.uwusPerSecond)
+	
 	for child in upgradesList.get_children():
 		if child is Upgrade:
-			child.disabled = child.cost > currency
-			child.unknown = child.ups / (uwusPerSecond+1) > 5
+			child.disabled = child.cost > GameState.uwus
+			child.unknown = child.ups / (GameState.uwusPerSecond+1) > 5
 
-	var desired_bguwus = max(roundi(log(uwusPerSecond)), 1)
+	var desired_bguwus = max(roundi(log(GameState.uwusPerSecond)), 1)
 	if(current_bguwus != desired_bguwus):
 		for uwu in bg_uwus_parent.get_children():
 			uwu.stop()
@@ -67,7 +56,7 @@ func _physics_process(delta: float) -> void:
 const EMITTER := preload("res://scenes/uwu_emitter.tscn")
 
 func _on_thing_to_click_pressed() -> void:
-	currency += 1
+	GameState.uwus += 1
 	var emitter = EMITTER.instantiate()
 	
 	var pos := get_global_mouse_position()
@@ -89,10 +78,7 @@ func _on_thing_to_click_pressed() -> void:
 	tween.tween_property(thing_to_click, "scale", defaultScale, 0.1)
 
 func _on_upgrade_1_upgrade_pressed(upgrade: Upgrade) -> void:
-	if(currency >= upgrade.cost):
-		currency -= upgrade.cost;
-		uwusPerSecond += upgrade.ups
-		upgrade.count += 1
+	pass
 
 func _on_timer_timeout() -> void:
 	save_game()
@@ -100,8 +86,8 @@ func _on_timer_timeout() -> void:
 
 func _on_reset_button_pressed() -> void:
 	Saves.delete_save()	
-	currency = 0
-	uwusPerSecond = 0
+	GameState.uwus = 0
+	GameState.uwusPerSecond = 0
 	for child in upgradesList.get_children():
 		if child is Upgrade:
 			child.count = 0
