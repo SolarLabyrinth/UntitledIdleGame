@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cehk2qf2o3ge5"]
+[gd_scene load_steps=6 format=3 uid="uid://cehk2qf2o3ge5"]
 
 [ext_resource type="Script" uid="uid://bhjhm5vwk1n53" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://cev5dkipg4jx1" path="res://scenes/background_uwu.tscn" id="2_7mycd"]
 [ext_resource type="PackedScene" uid="uid://jygpyt6vy24y" path="res://scenes/face.tscn" id="3_7mycd"]
 [ext_resource type="FontFile" uid="uid://cxfv8y6ihv7tu" path="res://assets/fonts/Kenney Mini Square Mono.ttf" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dgp8m52oilf71" path="res://scenes/upgrades_list.tscn" id="5_7mycd"]
@@ -10,10 +9,8 @@
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ig7tw")
 
-[node name="BGUwUs" type="Node" parent="."]
-
-[node name="CPUParticles2D" parent="." instance=ExtResource("2_7mycd")]
-position = Vector2(447, 761)
+[node name="BGUwUs" type="Node2D" parent="."]
+position = Vector2(457, 731)
 
 [node name="Face" parent="." instance=ExtResource("3_7mycd")]
 
@@ -85,9 +82,6 @@ vertical_alignment = 1
 
 [node name="UpgradesList" parent="." instance=ExtResource("5_7mycd")]
 
-[node name="SaveGameTimer" type="Timer" parent="."]
-autostart = true
-
 [node name="ResetButton" type="Button" parent="."]
 offset_left = 841.0
 offset_top = 678.0
@@ -95,5 +89,4 @@ offset_right = 889.0
 offset_bottom = 709.0
 text = "Reset"
 
-[connection signal="timeout" from="SaveGameTimer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

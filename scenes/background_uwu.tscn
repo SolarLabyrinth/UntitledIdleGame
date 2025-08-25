@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://b4y7yel4k5aap" path="res://scenes/background_uwu.gd" id="2_xsjwc"]
 
 [node name="CPUParticles2D" type="CPUParticles2D"]
-amount = 2
 texture = ExtResource("1_tv7gq")
 lifetime = 5.0
 emission_shape = 3

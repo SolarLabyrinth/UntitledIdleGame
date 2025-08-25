@@ -8,10 +8,18 @@ class_name Upgrade
 @onready var plus_one_button: TextureButton = $PlusOneButton
 @onready var plus_five_button: TextureButton = $PlusFiveButton
 
-@export var count := 0
 @export var base_cost := 0
 @export var text := ''
 @export var ups := 1
+
+var count := 0:
+	get():
+		if(GameState.upgrades.has(text)):
+			return int(GameState.upgrades[text])
+		else:
+			return 0
+	set(value):
+		GameState.upgrades[text] = value
 
 func _physics_process(delta: float) -> void:
 	var is_one_disabled = get_price(1) > GameState.uwus;
