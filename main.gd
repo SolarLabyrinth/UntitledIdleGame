@@ -1,19 +1,24 @@
 extends Node2D
 
-@onready var thing_to_click: TextureButton = $ThingTOClick
-@onready var rich_text_label: RichTextLabel = $RichTextLabel
+@onready var uwusLabel: RichTextLabel = $RichTextLabel
+@onready var upsLabel: RichTextLabel = $RichTextLabel2
 @onready var upgradesList: Control = $Control
-@onready var rich_text_label_2: RichTextLabel = $RichTextLabel2
-@onready var particles: Node = $Particles
-@onready var bg_uwus: CPUParticles2D = $CPUParticles2D
-@onready var bg_uwus_parent: Node = $BGUwUs
+@onready var bg_uwus: Node = $BGUwUs
+
+var upgrades: Array[Upgrade] = []
+
+func _ready():
+	for child in upgradesList.get_children():
+		if child is Upgrade:
+			upgrades.push_back(child as Upgrade)
+	load_game()
 
 func save_game():
 	var upgrades = {}
-	for child in upgradesList.get_children():
-		if child is Upgrade:
-			upgrades[child.text] = child.count
+	for child in upgrades:
+		upgrades[child.text] = child.count
 	Saves.save_to_file(GameState.uwus, GameState.uwusPerSecond, upgrades)
+	
 func load_game():
 	if not Saves.has_save_game():
 		save_game()
@@ -22,73 +27,38 @@ func load_game():
 	var elapsedSeconds = Time.get_unix_time_from_system() - save.timestamp
 	GameState.uwus = save.uwus + save.ups * elapsedSeconds
 	GameState.uwusPerSecond = save.ups
-	for child in upgradesList.get_children():
-		if child is Upgrade:
+	for child in upgrades:
+		if(save.upgrades.has(child.text)):
 			child.count = save.upgrades[child.text]
-
-func _ready():
-	load_game()
+		else:
+			child.count = 0
 
 var current_bguwus = 0
 
-const BGUWUS = preload("res://scenes/bguwus.tscn")
-
 func _physics_process(delta: float) -> void:
 	GameState.uwus += GameState.uwusPerSecond * delta
-	rich_text_label.text = "UwUs: " + str(int(floor(GameState.uwus)))
-	rich_text_label_2.text = "Uwu's Per Second: " + str(GameState.uwusPerSecond)
+	uwusLabel.text = "UwUs: " + str(int(floor(GameState.uwus)))
+	upsLabel.text = "Uwu's Per Second: " + str(GameState.uwusPerSecond)
 	
-	for child in upgradesList.get_children():
-		if child is Upgrade:
-			child.disabled = child.cost > GameState.uwus
-			child.unknown = child.ups / (GameState.uwusPerSecond+1) > 5
+	for child in upgrades:
+		child.disabled = child.cost > GameState.uwus
+		child.unknown = child.ups / (GameState.uwusPerSecond+1) > 5
 
 	var desired_bguwus = max(roundi(log(GameState.uwusPerSecond)), 1)
 	if(current_bguwus != desired_bguwus):
-		for uwu in bg_uwus_parent.get_children():
+		for uwu in bg_uwus.get_children():
 			uwu.stop()
-		var emitter = BGUWUS.instantiate()
-		emitter.amount = desired_bguwus
-		emitter.emitting = true
-		bg_uwus_parent.add_child(emitter)
+		var emitter = BackgroundUwU.create(desired_bguwus)
+		bg_uwus.add_child(emitter)
 		current_bguwus = desired_bguwus
-
-const EMITTER := preload("res://scenes/uwu_emitter.tscn")
-
-func _on_thing_to_click_pressed() -> void:
-	GameState.uwus += 1
-	var emitter = EMITTER.instantiate()
-	
-	var pos := get_global_mouse_position()
-	emitter.emitting = true
-	particles.add_child(emitter)
-	emitter.global_position = pos
-	
-	
-	var tween = get_tree().create_tween().bind_node(thing_to_click)
-	
-	var defaultScale = Vector2(1.0,1.0)
-	var newX = min(thing_to_click.scale.x * 1.25, 1.25)
-	var newY = min(thing_to_click.scale.y * 1.25, 1.25)
-	var newScale =  Vector2(newX, newY)
-	
-	#var newScale = log()
-	
-	tween.tween_property(thing_to_click, "scale", newScale, 0.1)
-	tween.tween_property(thing_to_click, "scale", defaultScale, 0.1)
-
-func _on_upgrade_1_upgrade_pressed(upgrade: Upgrade) -> void:
-	pass
 
 func _on_timer_timeout() -> void:
 	save_game()
-	pass
 
 func _on_reset_button_pressed() -> void:
 	Saves.delete_save()	
 	GameState.uwus = 0
 	GameState.uwusPerSecond = 0
-	for child in upgradesList.get_children():
-		if child is Upgrade:
-			child.count = 0
+	for child in upgrades:
+		child.count = 0
 	load_game()
