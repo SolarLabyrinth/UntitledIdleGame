@@ -13,7 +13,7 @@ func _on_face_btn_pressed() -> void:
 	
 	var tween = get_tree().create_tween().bind_node(face_btn)
 	
-	var newScale =  Vector2(
+	var newScale = Vector2(
 		min(face_btn.scale.x * 1.25, 1.25),
 		min(face_btn.scale.y * 1.25, 1.25)
 	)

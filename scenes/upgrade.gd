@@ -14,24 +14,24 @@ class_name Upgrade
 
 var count := 0:
 	get():
-		if(GameState.upgrades.has(text)):
+		if (GameState.upgrades.has(text)):
 			return int(GameState.upgrades[text])
 		else:
 			return 0
 	set(value):
 		GameState.upgrades[text] = value
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var is_one_disabled = get_price(1) > GameState.uwus;
-	if(plus_one_button.disabled != is_one_disabled):
+	if (plus_one_button.disabled != is_one_disabled):
 		plus_one_button.disabled = is_one_disabled
 		
 	var is_five_disabled = get_price(5) > GameState.uwus;
-	if(plus_five_button.disabled != is_five_disabled):
+	if (plus_five_button.disabled != is_five_disabled):
 		plus_five_button.disabled = is_five_disabled
 	
-	var is_hidden = ups / (GameState.uwusPerSecond+1) > 5
-	if(is_hidden):
+	var is_hidden = ups / (GameState.uwusPerSecond + 1) > 5
+	if (is_hidden):
 		name_label.text = "?"
 		cost_label.text = "--"
 		plus_one_button.disabled = true
@@ -48,7 +48,7 @@ func get_price(amount: int = 1):
 
 func buy(amount: int):
 	var total_cost = get_price(amount)
-	if(GameState.uwus >= total_cost):
+	if (GameState.uwus >= total_cost):
 		GameState.uwus -= total_cost;
 		GameState.uwusPerSecond += ups
 		count += amount

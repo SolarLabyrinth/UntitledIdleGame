@@ -6,12 +6,12 @@ extends Node2D
 
 var current_bguwus = 0
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	uwusLabel.text = "UwUs: " + str(int(floor(GameState.uwus)))
 	upsLabel.text = "Uwu's Per Second: " + str(GameState.uwusPerSecond)
 	
 	var desired_bguwus = max(roundi(log(GameState.uwusPerSecond)), 1) - 1
-	if(current_bguwus != desired_bguwus):
+	if (current_bguwus != desired_bguwus):
 		for uwu in bg_uwus.get_children():
 			uwu.stop()
 		var emitter = BackgroundUwU.create(desired_bguwus)

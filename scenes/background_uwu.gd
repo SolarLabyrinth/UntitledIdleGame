@@ -3,9 +3,9 @@ class_name BackgroundUwU
 
 const BGUWUS = preload("res://scenes/background_uwu.tscn")
 
-static func create(amount: int):
+static func create(count: int):
 	var emitter = BGUWUS.instantiate()
-	emitter.amount = amount
+	emitter.amount = count
 	emitter.emitting = true
 	return emitter
 
