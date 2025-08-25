@@ -1,21 +1,16 @@
 extends Node2D
 
-@onready var uwusLabel: RichTextLabel = $RichTextLabel
-@onready var upsLabel: RichTextLabel = $RichTextLabel2
-@onready var upgradesList: Control = $Control
+@onready var uwusLabel: RichTextLabel = $UwUsLabel
+@onready var upsLabel: RichTextLabel = $UwUsPerSecondLabel
+@onready var upgrades_list: UpgradesList = $UpgradesList
 @onready var bg_uwus: Node = $BGUwUs
 
-var upgrades: Array[Upgrade] = []
-
 func _ready():
-	for child in upgradesList.get_children():
-		if child is Upgrade:
-			upgrades.push_back(child as Upgrade)
 	load_game()
 
 func save_game():
 	var upgrades = {}
-	for child in upgrades:
+	for child in upgrades_list.upgrades:
 		upgrades[child.text] = child.count
 	Saves.save_to_file(GameState.uwus, GameState.uwusPerSecond, upgrades)
 	
@@ -27,7 +22,7 @@ func load_game():
 	var elapsedSeconds = Time.get_unix_time_from_system() - save.timestamp
 	GameState.uwus = save.uwus + save.ups * elapsedSeconds
 	GameState.uwusPerSecond = save.ups
-	for child in upgrades:
+	for child in upgrades_list.upgrades:
 		if(save.upgrades.has(child.text)):
 			child.count = save.upgrades[child.text]
 		else:
@@ -40,10 +35,6 @@ func _physics_process(delta: float) -> void:
 	uwusLabel.text = "UwUs: " + str(int(floor(GameState.uwus)))
 	upsLabel.text = "Uwu's Per Second: " + str(GameState.uwusPerSecond)
 	
-	for child in upgrades:
-		child.disabled = child.cost > GameState.uwus
-		child.unknown = child.ups / (GameState.uwusPerSecond+1) > 5
-
 	var desired_bguwus = max(roundi(log(GameState.uwusPerSecond)), 1)
 	if(current_bguwus != desired_bguwus):
 		for uwu in bg_uwus.get_children():
@@ -59,6 +50,6 @@ func _on_reset_button_pressed() -> void:
 	Saves.delete_save()	
 	GameState.uwus = 0
 	GameState.uwusPerSecond = 0
-	for child in upgrades:
+	for child in upgrades_list.upgrades:
 		child.count = 0
 	load_game()

@@ -18,9 +18,7 @@ static func save_to_file(uwus:int, ups:int, upgrades: Dictionary):
 	file.close()
 
 static func delete_save():
-	DirAccess.open("user://").remove("player_data.json")
-	#var errror = DirAccess.remove_absolute(save_path)
-	#print(errror)
+	DirAccess.remove_absolute(save_path)
 
 static func load_game():
 	var file = FileAccess.open(save_path, FileAccess.READ)

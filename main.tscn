@@ -1,32 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cehk2qf2o3ge5"]
+[gd_scene load_steps=7 format=3 uid="uid://cehk2qf2o3ge5"]
 
 [ext_resource type="Script" uid="uid://bhjhm5vwk1n53" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cev5dkipg4jx1" path="res://scenes/background_uwu.tscn" id="2_7mycd"]
 [ext_resource type="PackedScene" uid="uid://jygpyt6vy24y" path="res://scenes/face.tscn" id="3_7mycd"]
-[ext_resource type="PackedScene" uid="uid://bepyngk6nyw3i" path="res://scenes/Upgrade.tscn" id="3_h2yge"]
 [ext_resource type="FontFile" uid="uid://cxfv8y6ihv7tu" path="res://assets/fonts/Kenney Mini Square Mono.ttf" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dgp8m52oilf71" path="res://scenes/upgrades_list.tscn" id="5_7mycd"]
 [ext_resource type="FontFile" uid="uid://dyx4xkov5usjj" path="res://assets/fonts/Kenney Mini.ttf" id="5_lquwl"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_7mycd"]
-color = Color(0.235294, 0.368627, 0.545098, 1)
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_272bh"]
-color = Color(0.235294, 0.368627, 0.545098, 1)
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_5vw27"]
-color = Color(0.235294, 0.368627, 0.545098, 1)
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_kek77"]
-color = Color(0.235294, 0.368627, 0.545098, 1)
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_4c57u"]
-color = Color(0.235294, 0.368627, 0.545098, 1)
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_efxa6"]
-color = Color(0.235294, 0.368627, 0.545098, 1)
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_dg77c"]
-color = Color(0.235294, 0.368627, 0.545098, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ig7tw")
@@ -38,37 +17,47 @@ position = Vector2(447, 761)
 
 [node name="Face" parent="." instance=ExtResource("3_7mycd")]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="UIPanels" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="UIPanels"]
 z_index = 1
+layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 149.0
 color = Color(0.870588, 0.619608, 0.254902, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="ColorRect2" type="ColorRect" parent="UIPanels"]
 z_index = 1
+layout_mode = 0
 offset_left = 904.0
 offset_top = -17.0
 offset_right = 1290.0
 offset_bottom = 730.0
 color = Color(0.145098, 0.227451, 0.368627, 1)
 
-[node name="ColorRect3" type="ColorRect" parent="."]
+[node name="ColorRect3" type="ColorRect" parent="UIPanels"]
 z_index = 1
+layout_mode = 0
 offset_left = -11.0
 offset_top = 143.0
 offset_right = 908.0
 offset_bottom = 159.0
 color = Color(0.0352941, 0.0392157, 0.0784314, 1)
 
-[node name="ColorRect4" type="ColorRect" parent="."]
+[node name="ColorRect4" type="ColorRect" parent="UIPanels"]
 z_index = 1
+layout_mode = 0
 offset_left = 899.0
 offset_top = -4.0
 offset_right = 915.0
 offset_bottom = 731.0
 color = Color(0.0352941, 0.0392157, 0.0784314, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="UwUsLabel" type="RichTextLabel" parent="."]
 z_index = 1
 offset_left = 17.0
 offset_top = 4.0
@@ -81,79 +70,7 @@ text = "UwUs: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="VBoxContainer" parent="."]
-z_index = 1
-offset_left = 928.0
-offset_top = 22.0
-offset_right = 1013.5
-offset_bottom = 193.5
-scale = Vector2(4, 4)
-mouse_filter = 2
-
-[node name="HSeparator7" type="HSeparator" parent="Control"]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_7mycd")
-
-[node name="Upgrade1" parent="Control" instance=ExtResource("3_h2yge")]
-layout_mode = 2
-text = "Autoclicker"
-cost = 10.0
-
-[node name="HSeparator" type="HSeparator" parent="Control"]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_272bh")
-
-[node name="Upgrade2" parent="Control" instance=ExtResource("3_h2yge")]
-layout_mode = 2
-text = "OwO Dispenser"
-cost = 100.0
-ups = 10
-
-[node name="HSeparator2" type="HSeparator" parent="Control"]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_5vw27")
-
-[node name="Upgrade3" parent="Control" instance=ExtResource("3_h2yge")]
-layout_mode = 2
-text = "Nya Delivery"
-cost = 1000.0
-ups = 100
-
-[node name="HSeparator3" type="HSeparator" parent="Control"]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_kek77")
-
-[node name="Upgrade4" parent="Control" instance=ExtResource("3_h2yge")]
-layout_mode = 2
-text = "UwU Factory"
-cost = 10000.0
-ups = 1000
-
-[node name="HSeparator4" type="HSeparator" parent="Control"]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_4c57u")
-
-[node name="Upgrade5" parent="Control" instance=ExtResource("3_h2yge")]
-layout_mode = 2
-text = "Kitten Cloner"
-cost = 100000.0
-ups = 10000
-
-[node name="HSeparator5" type="HSeparator" parent="Control"]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_efxa6")
-
-[node name="Upgrade6" parent="Control" instance=ExtResource("3_h2yge")]
-layout_mode = 2
-text = "Cuteness Distiller"
-cost = 1e+06
-ups = 100000
-
-[node name="HSeparator6" type="HSeparator" parent="Control"]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_dg77c")
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+[node name="UwUsPerSecondLabel" type="RichTextLabel" parent="."]
 z_index = 1
 offset_left = 19.0
 offset_top = 68.0
@@ -166,7 +83,9 @@ text = "Uwu's Per Second: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="Timer" parent="."]
+[node name="UpgradesList" parent="." instance=ExtResource("5_7mycd")]
+
+[node name="SaveGameTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="ResetButton" type="Button" parent="."]
@@ -176,11 +95,5 @@ offset_right = 889.0
 offset_bottom = 709.0
 text = "Reset"
 
-[connection signal="upgrade_pressed" from="Control/Upgrade1" to="." method="_on_upgrade_1_upgrade_pressed"]
-[connection signal="upgrade_pressed" from="Control/Upgrade2" to="." method="_on_upgrade_1_upgrade_pressed"]
-[connection signal="upgrade_pressed" from="Control/Upgrade3" to="." method="_on_upgrade_1_upgrade_pressed"]
-[connection signal="upgrade_pressed" from="Control/Upgrade4" to="." method="_on_upgrade_1_upgrade_pressed"]
-[connection signal="upgrade_pressed" from="Control/Upgrade5" to="." method="_on_upgrade_1_upgrade_pressed"]
-[connection signal="upgrade_pressed" from="Control/Upgrade6" to="." method="_on_upgrade_1_upgrade_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SaveGameTimer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

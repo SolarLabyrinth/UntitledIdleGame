@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=3 uid="uid://dgp8m52oilf71"]
+
+[ext_resource type="PackedScene" uid="uid://bepyngk6nyw3i" path="res://scenes/upgrade.tscn" id="1_ujf54"]
+[ext_resource type="Script" uid="uid://cldl2vcg1a4hg" path="res://scenes/upgrades_list.gd" id="1_yxtbl"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_7mycd"]
+color = Color(0.235294, 0.368627, 0.545098, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_272bh"]
+color = Color(0.235294, 0.368627, 0.545098, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_5vw27"]
+color = Color(0.235294, 0.368627, 0.545098, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kek77"]
+color = Color(0.235294, 0.368627, 0.545098, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_4c57u"]
+color = Color(0.235294, 0.368627, 0.545098, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_efxa6"]
+color = Color(0.235294, 0.368627, 0.545098, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dg77c"]
+color = Color(0.235294, 0.368627, 0.545098, 1)
+
+[node name="UpgradesList" type="VBoxContainer"]
+z_index = 1
+offset_left = 928.0
+offset_top = 22.0
+offset_right = 1013.5
+offset_bottom = 193.5
+scale = Vector2(4, 4)
+mouse_filter = 2
+script = ExtResource("1_yxtbl")
+
+[node name="HSeparator7" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_7mycd")
+
+[node name="Upgrade1" parent="." instance=ExtResource("1_ujf54")]
+layout_mode = 2
+base_cost = 10
+text = "Autoclicker"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_272bh")
+
+[node name="Upgrade2" parent="." instance=ExtResource("1_ujf54")]
+layout_mode = 2
+base_cost = 100
+text = "OwO Dispenser"
+ups = 10
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_5vw27")
+
+[node name="Upgrade3" parent="." instance=ExtResource("1_ujf54")]
+layout_mode = 2
+base_cost = 1000
+text = "Nya Delivery"
+ups = 100
+
+[node name="HSeparator3" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_kek77")
+
+[node name="Upgrade4" parent="." instance=ExtResource("1_ujf54")]
+layout_mode = 2
+base_cost = 10000
+text = "UwU Factory"
+ups = 1000
+
+[node name="HSeparator4" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_4c57u")
+
+[node name="Upgrade5" parent="." instance=ExtResource("1_ujf54")]
+layout_mode = 2
+base_cost = 100000
+text = "Kitten Cloner"
+ups = 10000
+
+[node name="HSeparator5" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_efxa6")
+
+[node name="Upgrade6" parent="." instance=ExtResource("1_ujf54")]
+layout_mode = 2
+base_cost = 1000000
+text = "Cuteness Distiller"
+ups = 100000
+
+[node name="HSeparator6" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_dg77c")

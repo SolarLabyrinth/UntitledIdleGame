@@ -2,76 +2,50 @@
 extends Control
 class_name Upgrade
 
-signal upgrade_pressed(upgrade: Upgrade)
+@onready var name_label: RichTextLabel = $Control/NameLabel
+@onready var cost_label: RichTextLabel = $Control/CostLabel
 
-@onready var texture_button: TextureButton = $PlusOneButton
-@onready var rich_text_label: RichTextLabel = $Control/RichTextLabel
-@onready var rich_text_label_2: RichTextLabel = $Control/RichTextLabel2
+@onready var plus_one_button: TextureButton = $PlusOneButton
 @onready var plus_five_button: TextureButton = $PlusFiveButton
 
-@export var disabled := false:
-	get():
-		return disabled
-	set(value):
-		if texture_button:
-			texture_button.disabled = value
-		disabled = value
-
-@export var unknown := true:
-	get():
-		return unknown
-	set(value):
-		if value:
-			setCostLabel("--")
-		else:
-			setCostLabel(str(cost))
-		unknown = value
-
-@export var count := 0:
-	set(value):
-		count = value
-		setNameLabel()
-		setCostLabel(str(cost))
-
+@export var count := 0
 @export var base_cost := 0
-
-@export var text := '':
-	get():
-		return text
-	set(value):
-		text = value
-		setNameLabel()
-
-@export var cost := 0.0:
-	get():
-		return floori(cost * 1.1 ** count)
-	set(value):
-		cost = value
-
-func setNameLabel():
-	if rich_text_label:
-		rich_text_label.text = text + " (" + str(count) + ")"
-func setCostLabel(label: String):
-	if rich_text_label_2:
-		rich_text_label_2.text = "Cost: " + label
-
+@export var text := ''
 @export var ups := 1
 
-func _ready() -> void:
-	rich_text_label.text = text
-	unknown = unknown
-
-func _on_texture_button_pressed() -> void:
-	upgrade_pressed.emit(self)
-	if(GameState.uwus >= self.cost):
-		GameState.uwus -= self.cost;
-		GameState.uwusPerSecond += self.ups
-		self.count += 1
-
-func _on_plus_five_button_pressed() -> void:
-	var total_cost = self.cost + (self.cost * 1.1 ** 1) + (self.cost * 1.1 ** 2) + (self.cost * 1.1 ** 3) + (self.cost * 1.1 ** 4)
+func _physics_process(delta: float) -> void:
+	var is_one_disabled = get_price(1) > GameState.uwus;
+	if(plus_one_button.disabled != is_one_disabled):
+		plus_one_button.disabled = is_one_disabled
 		
+	var is_five_disabled = get_price(5) > GameState.uwus;
+	if(plus_five_button.disabled != is_five_disabled):
+		plus_five_button.disabled = is_five_disabled
+	
+	var is_hidden = ups / (GameState.uwusPerSecond+1) > 5
+	if(is_hidden):
+		name_label.text = "?"
+		cost_label.text = "--"
+		plus_one_button.disabled = true
+		plus_five_button.disabled = true
+	else:
+		name_label.text = text + " (" + str(count) + ")"
+		cost_label.text = "Cost: " + str(get_price(1))
+
+func get_price(amount: int = 1):
+	var total_cost = 0.0;
+	for i in amount:
+		total_cost += floori(base_cost * (1.1 ** (count + i)))
+	return total_cost
+
+func buy(amount: int):
+	var total_cost = get_price(amount)
 	if(GameState.uwus >= total_cost):
 		GameState.uwus -= total_cost;
-		GameState.uwusPerSecond += self.ups
-		self.count += 5
+		GameState.uwusPerSecond += ups
+		count += amount
+
+func _on_plus_one_button_pressed() -> void:
+	buy(1)
+func _on_plus_five_button_pressed() -> void:
+	buy(5)
